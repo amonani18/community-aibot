@@ -7,32 +7,24 @@ export default defineConfig({
     react(),
     federation({
       name: 'container',
+      filename: 'remoteEntry.js',
       remotes: {
-        auth: 'http://localhost:3001/assets/remoteEntry.js',
-        community: 'http://localhost:3002/assets/remoteEntry.js',
-        ai_assistant: 'http://localhost:3003/assets/remoteEntry.js',
+        auth: `${import.meta.env.VITE_AUTH_MFE_URL}/assets/remoteEntry.js`,
+        community: `${import.meta.env.VITE_COMMUNITY_MFE_URL}/assets/remoteEntry.js`,
+        ai_assistant: `${import.meta.env.VITE_AI_ASSISTANT_MFE_URL}/assets/remoteEntry.js`,
       },
-      shared: ['react', 'react-dom', '@apollo/client', 'react-router-dom', 'react-bootstrap']
-    })
+      shared: ['react', 'react-dom', 'react-router-dom', '@apollo/client', 'graphql'],
+    }),
   ],
   build: {
-    modulePreload: false,
     target: 'esnext',
     minify: false,
     cssCodeSplit: false,
-    rollupOptions: {
-      external: ['react', 'react-dom', '@apollo/client', 'react-router-dom', 'react-bootstrap']
-    }
   },
   server: {
     port: 3000,
     strictPort: true,
-    cors: {
-      origin: '*'
-    },
-    headers: {
-      'Access-Control-Allow-Origin': '*'
-    }
+    cors: true,
   },
   preview: {
     port: 3000,
