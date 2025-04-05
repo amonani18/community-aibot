@@ -12,7 +12,10 @@ export default defineConfig({
       exposes: {
         './AuthApp': './src/App.jsx'
       },
-      shared: ['react', 'react-dom', 'react-router-dom', '@apollo/client', 'graphql']
+      shared: ['react', 'react-dom', 'react-router-dom', '@apollo/client', 'graphql'],
+      remotes: {
+        container: 'https://community-aibot-container.onrender.com/assets/remoteEntry.js'
+      }
     })
   ],
   build: {
