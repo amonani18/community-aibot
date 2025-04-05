@@ -40,6 +40,9 @@ async function startServer() {
         locations: error.locations,
         path: error.path
       };
+    },
+    persistedQueries: {
+      cache: 'bounded'
     }
   });
 
@@ -62,8 +65,6 @@ async function startServer() {
 
     // Connect to MongoDB with the temporary certificate
     await mongoose.connect(MONGODB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
       tlsCertificateKeyFile: certPath
     });
     console.log('MongoDB connected successfully');
