@@ -28,11 +28,7 @@ export default defineConfig({
       name: 'container',
       filename: 'remoteEntry.js',
       remotes: {
-        auth: {
-          external: 'Promise.resolve(window.auth)',
-          from: 'vite',
-          externalType: 'promise'
-        },
+        auth: getRemoteUrl('auth'),
         community: getRemoteUrl('community'),
         ai_assistant: getRemoteUrl('ai_assistant'),
       },
