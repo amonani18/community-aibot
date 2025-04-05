@@ -18,11 +18,6 @@ const defaultUrls = {
 const getRemoteUrl = (name) => {
   const envVar = `VITE_${name.toUpperCase()}_MFE_URL`;
   const url = getEnvVar(envVar, defaultUrls[name]);
-  // For auth MFE, use the direct URL since it's working standalone
-  if (name === 'auth') {
-    return url;
-  }
-  // For other MFEs, append the remoteEntry.js path
   return `${url}/assets/remoteEntry.js`;
 };
 
@@ -34,9 +29,9 @@ export default defineConfig({
       filename: 'remoteEntry.js',
       remotes: {
         auth: {
-          external: getRemoteUrl('auth'),
+          external: 'Promise.resolve(window.auth)',
           from: 'vite',
-          externalType: 'url'
+          externalType: 'promise'
         },
         community: getRemoteUrl('community'),
         ai_assistant: getRemoteUrl('ai_assistant'),
