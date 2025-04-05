@@ -18,7 +18,7 @@ const defaultUrls = {
 const getRemoteUrl = (name) => {
   const envVar = `VITE_${name.toUpperCase()}_MFE_URL`;
   const url = getEnvVar(envVar, defaultUrls[name]);
-  return `${url}/assets/remoteEntry.js`;
+  return `${url}/remoteEntry.js`;
 };
 
 export default defineConfig({
@@ -29,7 +29,7 @@ export default defineConfig({
       filename: 'remoteEntry.js',
       remotes: {
         auth: {
-          external: 'https://community-aibot-1.onrender.com/assets/remoteEntry.js',
+          external: 'https://community-aibot-1.onrender.com/remoteEntry.js',
           from: 'vite',
           externalType: 'url'
         },
@@ -43,6 +43,14 @@ export default defineConfig({
     target: 'esnext',
     minify: false,
     cssCodeSplit: false,
+    rollupOptions: {
+      output: {
+        format: 'esm',
+        entryFileNames: '[name].js',
+        chunkFileNames: '[name].js',
+        assetFileNames: '[name].[ext]'
+      }
+    }
   },
   server: {
     port: 3000,

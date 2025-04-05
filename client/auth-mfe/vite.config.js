@@ -12,10 +12,7 @@ export default defineConfig({
       exposes: {
         './AuthApp': './src/App.jsx'
       },
-      shared: ['react', 'react-dom', 'react-router-dom', '@apollo/client', 'graphql'],
-      remotes: {
-        container: 'https://community-aibot-container.onrender.com/assets/remoteEntry.js'
-      }
+      shared: ['react', 'react-dom', 'react-router-dom', '@apollo/client', 'graphql']
     })
   ],
   build: {
@@ -25,9 +22,9 @@ export default defineConfig({
     rollupOptions: {
       output: {
         format: 'esm',
-        entryFileNames: 'assets/[name].js',
-        chunkFileNames: 'assets/[name].js',
-        assetFileNames: 'assets/[name].[ext]'
+        entryFileNames: '[name].js',
+        chunkFileNames: '[name].js',
+        assetFileNames: '[name].[ext]'
       }
     }
   },
