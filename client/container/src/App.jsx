@@ -226,12 +226,12 @@ const PrivateRoute = ({ children }) => {
 
 // Footer Component
 const Footer = () => (
-  <footer className="bg-dark text-white py-3">
-    <Container>
+  <footer className="">
+    {/* <Container>
       <div className="text-center">
         <p className="mb-0">© 2024 Community Portal. All rights reserved.</p>
       </div>
-    </Container>
+    </Container> */}
   </footer>
 );
 
@@ -296,7 +296,7 @@ const AppNavbar = ({ isLoggedIn, handleLogout }) => {
                     <i className="bi bi-house-door me-1"></i> Community
                   </NavLink>
                 )}
-                <NavLink to="/auth/profile">
+                <NavLink to="/community/profile">
                   <i className="bi bi-person-circle me-1"></i> Profile
                 </NavLink>
                 <Nav.Link onClick={handleLogout} className="nav-link px-3">
@@ -315,7 +315,14 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(isAuthenticated());
 
   useEffect(() => {
-    checkAuth();
+    const handleAuthChange = () => {
+      console.log('Auth state changed, checking authentication...');
+      const authenticated = isAuthenticated();
+      setIsLoggedIn(authenticated);
+    };
+
+    window.addEventListener('auth-changed', handleAuthChange);
+    return () => window.removeEventListener('auth-changed', handleAuthChange);
   }, []);
 
   const checkAuth = () => {
@@ -325,7 +332,10 @@ function App() {
 
   const handleLogout = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('user');
     setIsLoggedIn(false);
+    window.location.href = '/';
   };
 
   return (
@@ -340,11 +350,7 @@ function App() {
                 <Route
                   path="/auth/*"
                   element={
-                    !isLoggedIn ? (
-                      <AuthApp onLoginSuccess={checkAuth} />
-                    ) : (
-                      <Navigate to="/" replace />
-                    )
+                    <AuthApp onLoginSuccess={checkAuth} />
                   }
                 />
                 <Route

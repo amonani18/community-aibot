@@ -81,7 +81,7 @@ function DiscussionList() {
           {data.communityPosts.map((post) => (
             <Col key={post.id} md={6} lg={4} className="mb-4">
               <Card 
-                className="h-100 shadow-sm hover-card"
+                className="h-100 shadow-sm discussion-card"
                 onClick={() => handleCardClick(post.id)}
                 style={{ cursor: 'pointer' }}
               >
@@ -129,11 +129,11 @@ function DiscussionList() {
         </Row>
       )}
 
-      <style jsx>{`
-        .hover-card {
+      <style>{`
+        .discussion-card {
           transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
         }
-        .hover-card:hover {
+        .discussion-card:hover {
           transform: translateY(-5px);
           box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
         }

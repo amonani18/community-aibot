@@ -41,8 +41,18 @@ function Login() {
       console.log('Login successful, received data:', data);
       
       if (data && data.login && data.login.token) {
+        // Save the token and user data first
+        localStorage.setItem('token', data.login.token);
+        localStorage.setItem('userId', data.login.user.id);
+        localStorage.setItem('user', JSON.stringify(data.login.user));
+        
+        // Call the login function from context
         login(data.login.token, data.login.user);
-        console.log('Login handler called, token saved');
+        
+        // Use a small timeout to ensure the token is saved before redirecting
+        setTimeout(() => {
+          window.location.href = '/community';
+        }, 100);
       } else {
         setError('Invalid response from server');
         console.error('Invalid login response:', data);

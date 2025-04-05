@@ -321,4 +321,4 @@ const AIChatbot = () => {
   );
 };
 
-export default AIChatbot; 
+export default AIChatbot;

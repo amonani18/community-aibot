@@ -1,12 +1,11 @@
 import React from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route, Link, Navigate } from 'react-router-dom';
 import { ApolloProvider } from '@apollo/client';
 import { Container, Button, Row, Col, Card } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Login from './components/Login';
 import Register from './components/Register';
-import Profile from './components/Profile';
 import PrivateRoute from './components/PrivateRoute';
 import { AuthProvider } from './context/AuthContext';
 import { apolloClient } from './apollo/client';
@@ -75,15 +74,7 @@ function App() {
             <Route index element={<DefaultAuthView />} />
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
-            <Route
-              path="profile"
-              element={
-                <PrivateRoute>
-                  <Profile />
-                </PrivateRoute>
-              }
-            />
-            <Route path="*" element={<DefaultAuthView />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </Container>
       </AuthProvider>
