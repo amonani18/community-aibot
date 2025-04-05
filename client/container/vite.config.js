@@ -2,6 +2,25 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import federation from '@originjs/vite-plugin-federation';
 
+// Helper function to get environment variable with fallback
+const getEnvVar = (key, defaultValue) => {
+  return process.env[key] || defaultValue;
+};
+
+// Default URLs for development
+const defaultUrls = {
+  auth: 'http://localhost:3001',
+  community: 'http://localhost:3002',
+  ai_assistant: 'http://localhost:3003'
+};
+
+// Get URLs from environment or use defaults
+const getRemoteUrl = (name) => {
+  const envVar = `VITE_${name.toUpperCase()}_MFE_URL`;
+  const url = getEnvVar(envVar, defaultUrls[name]);
+  return `${url}/assets/remoteEntry.js`;
+};
+
 export default defineConfig({
   plugins: [
     react(),
@@ -9,9 +28,9 @@ export default defineConfig({
       name: 'container',
       filename: 'remoteEntry.js',
       remotes: {
-        auth: `${import.meta.env.VITE_AUTH_MFE_URL}/assets/remoteEntry.js`,
-        community: `${import.meta.env.VITE_COMMUNITY_MFE_URL}/assets/remoteEntry.js`,
-        ai_assistant: `${import.meta.env.VITE_AI_ASSISTANT_MFE_URL}/assets/remoteEntry.js`,
+        auth: getRemoteUrl('auth'),
+        community: getRemoteUrl('community'),
+        ai_assistant: getRemoteUrl('ai_assistant'),
       },
       shared: ['react', 'react-dom', 'react-router-dom', '@apollo/client', 'graphql'],
     }),
