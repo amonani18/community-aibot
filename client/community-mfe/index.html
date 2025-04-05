@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/community.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+      /* Root styles for full-width display */
+      *, *::before, *::after {
+        box-sizing: border-box;
+      }
+      
+      html, body, #root {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      }
+      
+      #root {
+        display: flex;
+        flex-direction: column;
+      }
+      
+      .community-page {
+        flex: 1 0 auto;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+      
+      .community-container {
+        flex: 1 0 auto;
+        padding: 0 15px;
+        max-width: 1320px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+      }
+      
+      /* Media query for smaller screens - increase padding on smaller screens */
+      @media (max-width: 768px) {
+        .community-container {
+          padding: 0 20px;
+        }
+      }
+      
+      /* Dropdown styles */
+      .dropdown-toggle.no-arrow::after {
+        display: none;
+      }
+    </style>
+    <title>Community MFE</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

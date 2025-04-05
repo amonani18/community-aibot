@@ -1,0 +1,63 @@
+/* Component-specific styles */
+
+/* Card styles */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  width: 100%;
+}
+
+/* Header styles */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.page-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+/* Empty state styles */
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  border-radius: 0.5rem;
+  background-color: #f9f9f9;
+  margin: 2rem 0;
+}
+
+.empty-state p {
+  font-size: 1.2rem;
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+/* Form styles */
+.form-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Button container */
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+/* Custom shadows */
+.custom-shadow {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.custom-shadow-hover:hover {
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+} 

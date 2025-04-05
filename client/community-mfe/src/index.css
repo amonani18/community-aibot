@@ -1,0 +1,421 @@
+/* Global styles */
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: light dark;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  --primary-color: #0369a1;
+  --primary-gradient: linear-gradient(135deg, #0369a1 0%, #38bdf8 100%);
+  --secondary-color: #38bdf8;
+  --success-color: #10b981;
+  --warning-color: #fbbf24;
+  --danger-color: #ef4444;
+  --light-color: #f9fafb;
+  --dark-color: #1f2937;
+  --box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --transition-speed: 0.3s;
+}
+
+/* Community app styles */
+.community-page {
+  width: 100%;
+  max-width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+/* Ensure containers take full width */
+.community-page .container {
+  width: 100%;
+  max-width: 100%;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+/* Ensure card layouts are consistent */
+.card {
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1) !important;
+}
+
+/* Improve button styling */
+.btn-primary {
+  font-weight: 500;
+}
+
+.btn-outline-primary:hover {
+  transform: translateY(-1px);
+}
+
+/* Improve card footer styling */
+.card-footer {
+  background-color: transparent;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .community-page .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+}
+
+/* Add to your existing CSS */
+
+/* Global styles */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+/* Help request cards */
+.hover-shadow {
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.hover-shadow:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1) !important;
+  transform: translateY(-2px);
+}
+
+/* Badge styling */
+.badge {
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+/* Improved buttons */
+.btn-primary {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}
+
+.btn-success {
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+.btn-warning {
+  background-color: #ffc107;
+  border-color: #ffc107;
+  color: #212529;
+}
+
+/* Nav tabs styling */
+.nav-tabs .nav-link {
+  color: #6c757d;
+  font-weight: 500;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  padding: 0.75rem 1.5rem;
+}
+
+.nav-tabs .nav-link.active {
+  color: #0d6efd;
+  font-weight: 600;
+  border-bottom-color: transparent;
+}
+
+.nav-tabs .nav-link:hover:not(.active) {
+  background-color: rgba(13, 110, 253, 0.1);
+  border-color: transparent;
+}
+
+/* Community content area */
+.community-content {
+  min-height: 80vh;
+}
+
+/* Volunteer section styling */
+.volunteer-list {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+/* Location badge */
+.location-badge {
+  background-color: #f8f9fa;
+  color: #495057;
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+}
+
+.location-badge i {
+  margin-right: 0.5rem;
+  color: #0d6efd;
+}
+
+/* Status badges */
+.status-badge-resolved {
+  background-color: #28a745;
+  color: white;
+}
+
+.status-badge-open {
+  background-color: #ffc107;
+  color: #212529;
+}
+
+/* Community specific styles */
+.community-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.community-content {
+  flex: 1;
+  padding: 1.5rem 0;
+}
+
+/* Card enhancements */
+.card {
+  transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+  border: none !important;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Post cards styling */
+.post-card {
+  margin-bottom: 1.5rem;
+}
+
+.post-card .card-body {
+  padding: 1.5rem;
+}
+
+.post-card .post-title {
+  font-weight: 700;
+  color: var(--dark-color);
+}
+
+.post-card .post-meta {
+  font-size: 0.875rem;
+  color: #6c757d;
+  margin-bottom: 1rem;
+}
+
+/* Button enhancements */
+.btn {
+  transition: all var(--transition-speed);
+  position: relative;
+  overflow: hidden;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+}
+
+.btn-primary {
+  background: var(--primary-gradient);
+  border: none;
+}
+
+.btn-primary:hover {
+  box-shadow: 0 4px 12px rgba(3, 105, 161, 0.3);
+}
+
+.btn-outline-primary {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+/* Community navigation styles */
+.community-nav {
+  background-color: white;
+  border-bottom: 1px solid #e9ecef;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  padding: 0.75rem 0;
+}
+
+.community-nav .nav-link {
+  color: var(--dark-color);
+  padding: 0.75rem 1rem;
+  margin-right: 0.5rem;
+  border-radius: 0.5rem;
+  transition: all var(--transition-speed);
+}
+
+.community-nav .nav-link:hover {
+  background-color: rgba(3, 105, 161, 0.05);
+}
+
+.community-nav .nav-link.active {
+  color: var(--primary-color);
+  background-color: rgba(3, 105, 161, 0.1);
+  font-weight: 600;
+}
+
+.community-nav .nav-link i {
+  margin-right: 0.5rem;
+}
+
+/* Form control enhancements */
+.form-control, .form-select {
+  transition: all var(--transition-speed);
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.75rem;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.2rem rgba(3, 105, 161, 0.25);
+}
+
+/* Custom animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.fade-in {
+  animation: fadeIn var(--transition-speed) ease-in;
+}
+
+.slide-in {
+  animation: slideInUp var(--transition-speed) ease-out;
+}
+
+/* Badge styles */
+.badge {
+  padding: 0.35em 0.65em;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+/* Category badges */
+.badge-news {
+  background-color: #0ea5e9;
+  color: white;
+}
+
+.badge-discussion {
+  background-color: #8b5cf6;
+  color: white;
+}
+
+.badge-help {
+  background-color: #f59e0b;
+  color: white;
+}
+
+.badge-resolved {
+  background-color: #10b981;
+  color: white;
+}
+
+/* Alert styles */
+.alert {
+  border-radius: 0.5rem;
+  border: none;
+}
+
+/* Author label */
+.author-label {
+  display: inline-block;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  background-color: rgba(3, 105, 161, 0.1);
+  color: var(--primary-color);
+  border-radius: 0.25rem;
+  margin-left: 0.5rem;
+}
+
+/* Empty state styling */
+.empty-state {
+  text-align: center;
+  padding: 3rem 1rem;
+  background-color: #f8f9fa;
+  border-radius: 0.5rem;
+}
+
+.empty-state i {
+  font-size: 3rem;
+  color: #cbd5e1;
+  margin-bottom: 1rem;
+}
+
+.empty-state h4 {
+  color: #64748b;
+  margin-bottom: 1rem;
+}
+
+/* Help request styles */
+.help-request-card {
+  position: relative;
+  border-left: 4px solid var(--warning-color);
+}
+
+.help-request-card.resolved {
+  border-left-color: var(--success-color);
+}
+
+/* Comment section styles */
+.comment-section {
+  margin-top: 2rem;
+  border-top: 1px solid #e9ecef;
+  padding-top: 1.5rem;
+}
+
+.comment {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: #f8f9fa;
+  margin-bottom: 1rem;
+}
+
+.comment-author {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.comment-time {
+  font-size: 0.75rem;
+  color: #6c757d;
+}
+
+/* Create post form */
+.create-post-form {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.create-post-form textarea {
+  min-height: 150px;
+}
