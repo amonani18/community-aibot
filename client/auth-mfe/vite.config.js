@@ -12,16 +12,20 @@ export default defineConfig({
       exposes: {
         './AuthApp': './src/App.jsx'
       },
-      shared: ['react', 'react-dom', '@apollo/client', 'react-router-dom', 'react-bootstrap']
+      shared: ['react', 'react-dom', 'react-router-dom', '@apollo/client', 'graphql']
     })
   ],
   build: {
-    modulePreload: false,
     target: 'esnext',
     minify: false,
     cssCodeSplit: false,
     rollupOptions: {
-      external: ['react', 'react-dom', '@apollo/client', 'react-router-dom', 'react-bootstrap']
+      output: {
+        format: 'esm',
+        entryFileNames: 'assets/[name].js',
+        chunkFileNames: 'assets/[name].js',
+        assetFileNames: 'assets/[name].[ext]'
+      }
     }
   },
   server: {
