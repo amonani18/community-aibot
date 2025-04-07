@@ -4,7 +4,7 @@ import federation from '@originjs/vite-plugin-federation'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '',
+  base: '/',
   plugins: [
     react(),
     federation({
@@ -21,6 +21,7 @@ export default defineConfig({
     target: 'esnext',
     minify: false,
     cssCodeSplit: false,
+    outDir: 'dist',
     assetsDir: 'assets',
     rollupOptions: {
       external: ['react', 'react-dom', '@apollo/client', 'react-router-dom', 'react-bootstrap'],
@@ -28,8 +29,7 @@ export default defineConfig({
         format: 'esm',
         entryFileNames: '[name].js',
         chunkFileNames: 'assets/[name].[hash].js',
-        assetFileNames: 'assets/[name].[hash].[ext]',
-        manualChunks: undefined
+        assetFileNames: 'assets/[name].[hash].[ext]'
       }
     }
   },
@@ -37,17 +37,14 @@ export default defineConfig({
     port: 3001,
     strictPort: true,
     cors: {
-      origin: [
-        'http://localhost:3000',
-        'https://community-aibot-container.onrender.com'
-      ],
-      methods: ['GET', 'POST', 'OPTIONS'],
+      origin: ['https://community-aibot-container.onrender.com', 'http://localhost:3000'],
+      methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
       allowedHeaders: ['Content-Type', 'Authorization'],
       credentials: true
     },
     headers: {
-      'Access-Control-Allow-Origin': 'https://community-aibot-container.onrender.com',
-      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, PATCH, DELETE, OPTIONS',
       'Access-Control-Allow-Headers': 'Content-Type, Authorization',
       'Access-Control-Allow-Credentials': 'true'
     }
@@ -56,17 +53,14 @@ export default defineConfig({
     port: 3001,
     strictPort: true,
     cors: {
-      origin: [
-        'http://localhost:3000',
-        'https://community-aibot-container.onrender.com'
-      ],
-      methods: ['GET', 'POST', 'OPTIONS'],
+      origin: ['https://community-aibot-container.onrender.com', 'http://localhost:3000'],
+      methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
       allowedHeaders: ['Content-Type', 'Authorization'],
       credentials: true
     },
     headers: {
-      'Access-Control-Allow-Origin': 'https://community-aibot-container.onrender.com',
-      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, PATCH, DELETE, OPTIONS',
       'Access-Control-Allow-Headers': 'Content-Type, Authorization',
       'Access-Control-Allow-Credentials': 'true'
     }
