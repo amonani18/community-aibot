@@ -47,11 +47,16 @@ async function startServer() {
   const PORT = process.env.PORT || 4000;
   const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/community-app';
 
+  // MongoDB connection options
+  const mongooseOptions = {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    ssl: true,
+    sslValidate: true
+  };
+
   try {
-    await mongoose.connect(MONGODB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-    });
+    await mongoose.connect(MONGODB_URI, mongooseOptions);
     console.log('MongoDB connected successfully');
 
     app.listen(PORT, () => {
@@ -60,6 +65,10 @@ async function startServer() {
     });
   } catch (error) {
     console.error('Error connecting to MongoDB:', error.message);
+    // Log additional error details for debugging
+    if (error.code === 'ENOENT') {
+      console.error('Certificate file not found. Please check the path:', process.env.MONGODB_URI);
+    }
   }
 }
 
