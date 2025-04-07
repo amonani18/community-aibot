@@ -13,32 +13,11 @@ export default defineConfig(({ mode }) => {
       federation({
         name: 'container',
         remotes: {
-          auth: 'https://community-aibot-1.onrender.com/remoteEntry.js',
-          community: 'https://community-aibot-community-mfe.onrender.com/remoteEntry.js',
-          ai_assistant: 'https://community-aibot-chatbox-mfe.onrender.com/remoteEntry.js'
+          auth: env.VITE_AUTH_URL || 'http://localhost:3001/assets/remoteEntry.js',
+          community: env.VITE_COMMUNITY_URL || 'http://localhost:3002/assets/remoteEntry.js',
+          ai_assistant: env.VITE_AI_ASSISTANT_URL || 'http://localhost:3003/assets/remoteEntry.js',
         },
-        shared: {
-          react: {
-            singleton: true,
-            requiredVersion: '^18.0.0'
-          },
-          'react-dom': {
-            singleton: true,
-            requiredVersion: '^18.0.0'
-          },
-          '@apollo/client': {
-            singleton: true,
-            requiredVersion: '^3.0.0'
-          },
-          'react-router-dom': {
-            singleton: true,
-            requiredVersion: '^6.0.0'
-          },
-          'react-bootstrap': {
-            singleton: true,
-            requiredVersion: '^2.0.0'
-          }
-        }
+        shared: ['react', 'react-dom', '@apollo/client', 'react-router-dom', 'react-bootstrap']
       })
     ],
     build: {
@@ -50,9 +29,10 @@ export default defineConfig(({ mode }) => {
         external: ['react', 'react-dom', '@apollo/client', 'react-router-dom', 'react-bootstrap'],
         output: {
           format: 'esm',
-          entryFileNames: '[name].js',
-          chunkFileNames: 'assets/[name].[hash].js',
-          assetFileNames: 'assets/[name].[hash].[ext]'
+          dir: 'dist',
+          entryFileNames: 'assets/[name].js',
+          chunkFileNames: 'assets/[name].js',
+          assetFileNames: 'assets/[name].[ext]'
         }
       }
     },
@@ -68,13 +48,13 @@ export default defineConfig(({ mode }) => {
           'https://community-aibot-community-mfe.onrender.com',
           'https://community-aibot-chatbox-mfe.onrender.com'
         ],
-        methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+        methods: ['GET', 'POST', 'OPTIONS'],
         allowedHeaders: ['Content-Type', 'Authorization'],
         credentials: true
       },
       headers: {
         'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST, PUT, PATCH, DELETE, OPTIONS',
+        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
         'Access-Control-Allow-Headers': 'Content-Type, Authorization',
         'Access-Control-Allow-Credentials': 'true'
       }
@@ -91,13 +71,13 @@ export default defineConfig(({ mode }) => {
           'https://community-aibot-community-mfe.onrender.com',
           'https://community-aibot-chatbox-mfe.onrender.com'
         ],
-        methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+        methods: ['GET', 'POST', 'OPTIONS'],
         allowedHeaders: ['Content-Type', 'Authorization'],
         credentials: true
       },
       headers: {
         'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST, PUT, PATCH, DELETE, OPTIONS',
+        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
         'Access-Control-Allow-Headers': 'Content-Type, Authorization',
         'Access-Control-Allow-Credentials': 'true'
       }
