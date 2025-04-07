@@ -51,8 +51,9 @@ async function startServer() {
   const mongooseOptions = {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    ssl: true,
-    sslValidate: true
+    tls: true,
+    tlsAllowInvalidCertificates: false,
+    tlsAllowInvalidHostnames: false
   };
 
   try {
