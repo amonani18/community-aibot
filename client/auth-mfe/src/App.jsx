@@ -3,12 +3,13 @@ import { Routes, Route, Link, Navigate } from 'react-router-dom';
 import { ApolloProvider } from '@apollo/client';
 import { Container, Button, Row, Col, Card } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 import Login from './components/Login';
 import Register from './components/Register';
 import PrivateRoute from './components/PrivateRoute';
 import { AuthProvider } from './context/AuthContext';
-import { apolloClient } from './apollo/client';
+import apolloClient from './apollo/client';
 
 // Home/Default Component
 const DefaultAuthView = () => (
@@ -69,14 +70,22 @@ function App() {
   return (
     <ApolloProvider client={apolloClient}>
       <AuthProvider>
-        <Container className="py-4">
+        <Router>
           <Routes>
             <Route index element={<DefaultAuthView />} />
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
             <Route path="*" element={<Navigate to="/" replace />} />
+            <Route
+              path="/dashboard"
+              element={
+                <PrivateRoute>
+                  <div>Dashboard</div>
+                </PrivateRoute>
+              }
+            />
           </Routes>
-        </Container>
+        </Router>
       </AuthProvider>
     </ApolloProvider>
   );
