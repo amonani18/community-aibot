@@ -14,8 +14,16 @@ async function startServer() {
   
   // Apply middleware
   app.use(cors({
-    origin: ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:3002', 'http://localhost:3003'],
-    credentials: true
+    origin: [
+      'http://localhost:3000',
+      'http://localhost:3001',
+      'http://localhost:3002',
+      'http://localhost:3003',
+      'https://*.onrender.com'  // Allow all Render subdomains
+    ],
+    credentials: true,
+    methods: ['GET', 'POST', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
   }));
   app.use(express.json());
   app.use(auth); // Apply auth middleware
