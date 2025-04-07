@@ -4,7 +4,7 @@ import federation from '@originjs/vite-plugin-federation'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/',
+  base: 'https://community-aibot-1.onrender.com/',
   plugins: [
     react(),
     federation({
