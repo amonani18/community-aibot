@@ -13,7 +13,28 @@ export default defineConfig({
       exposes: {
         './AuthApp': './src/App.jsx'
       },
-      shared: ['react', 'react-dom', '@apollo/client', 'react-router-dom', 'react-bootstrap']
+      shared: {
+        react: {
+          singleton: true,
+          requiredVersion: '^18.0.0'
+        },
+        'react-dom': {
+          singleton: true,
+          requiredVersion: '^18.0.0'
+        },
+        '@apollo/client': {
+          singleton: true,
+          requiredVersion: '^3.0.0'
+        },
+        'react-router-dom': {
+          singleton: true,
+          requiredVersion: '^6.0.0'
+        },
+        'react-bootstrap': {
+          singleton: true,
+          requiredVersion: '^2.0.0'
+        }
+      }
     })
   ],
   build: {
@@ -22,21 +43,11 @@ export default defineConfig({
     minify: false,
     cssCodeSplit: false,
     outDir: 'dist',
-    assetsDir: 'assets',
     rollupOptions: {
       external: ['react', 'react-dom', '@apollo/client', 'react-router-dom', 'react-bootstrap'],
-      input: {
-        main: 'index.html',
-        remoteEntry: 'src/App.jsx'
-      },
       output: {
         format: 'esm',
-        entryFileNames: (chunkInfo) => {
-          if (chunkInfo.name === 'remoteEntry') {
-            return 'remoteEntry.js';
-          }
-          return 'assets/[name].[hash].js';
-        },
+        entryFileNames: '[name].js',
         chunkFileNames: 'assets/[name].[hash].js',
         assetFileNames: 'assets/[name].[hash].[ext]'
       }
