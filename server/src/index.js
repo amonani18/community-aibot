@@ -49,7 +49,7 @@ async function startServer() {
   });
 
   await apolloServer.start();
-  apolloServer.applyMiddleware({ app, cors: false });
+  apolloServer.applyMiddleware({ app, cors: true });
 
   const PORT = process.env.PORT || 4000;
   const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/community-app';
