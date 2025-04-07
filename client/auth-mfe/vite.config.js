@@ -28,20 +28,38 @@ export default defineConfig({
     port: 3001,
     strictPort: true,
     cors: {
-      origin: '*'
+      origin: [
+        'http://localhost:3000',
+        'https://community-aibot-container.onrender.com'
+      ],
+      methods: ['GET', 'POST', 'OPTIONS'],
+      allowedHeaders: ['Content-Type', 'Authorization'],
+      credentials: true
     },
     headers: {
-      'Access-Control-Allow-Origin': '*'
+      'Access-Control-Allow-Origin': 'https://community-aibot-container.onrender.com',
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+      'Access-Control-Allow-Credentials': 'true'
     }
   },
   preview: {
     port: 3001,
     strictPort: true,
     cors: {
-      origin: '*'
+      origin: [
+        'http://localhost:3000',
+        'https://community-aibot-container.onrender.com'
+      ],
+      methods: ['GET', 'POST', 'OPTIONS'],
+      allowedHeaders: ['Content-Type', 'Authorization'],
+      credentials: true
     },
     headers: {
-      'Access-Control-Allow-Origin': '*'
+      'Access-Control-Allow-Origin': 'https://community-aibot-container.onrender.com',
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+      'Access-Control-Allow-Credentials': 'true'
     }
   }
 })

@@ -33,20 +33,46 @@ export default defineConfig(({ mode }) => {
       port: 3000,
       strictPort: true,
       cors: {
-        origin: '*'
+        origin: [
+          'http://localhost:3001',
+          'http://localhost:3002',
+          'http://localhost:3003',
+          'https://community-aibot-1.onrender.com',
+          'https://community-aibot-chatbox-mfe.onrender.com',
+          'https://community-aibot-community-mfe.onrender.com'
+        ],
+        methods: ['GET', 'POST', 'OPTIONS'],
+        allowedHeaders: ['Content-Type', 'Authorization'],
+        credentials: true
       },
       headers: {
-        'Access-Control-Allow-Origin': '*'
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+        'Access-Control-Allow-Credentials': 'true'
       }
     },
     preview: {
       port: 3000,
       strictPort: true,
       cors: {
-        origin: '*'
+        origin: [
+          'http://localhost:3001',
+          'http://localhost:3002',
+          'http://localhost:3003',
+          'https://community-aibot-1.onrender.com',
+          'https://community-aibot-2.onrender.com',
+          'https://community-aibot-3.onrender.com'
+        ],
+        methods: ['GET', 'POST', 'OPTIONS'],
+        allowedHeaders: ['Content-Type', 'Authorization'],
+        credentials: true
       },
       headers: {
-        'Access-Control-Allow-Origin': '*'
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+        'Access-Control-Allow-Credentials': 'true'
       }
     }
   };
