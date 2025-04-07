@@ -1,18 +1,19 @@
 import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
+console.log('Initializing Apollo Client with API URL:', import.meta.env.VITE_API_URL);
+
 const httpLink = createHttpLink({
   uri: import.meta.env.VITE_API_URL,
   credentials: 'include',
-  headers: {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type, Authorization'
+  fetchOptions: {
+    mode: 'cors'
   }
 });
 
 const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem('token');
+  console.log('Setting auth context, token present:', !!token);
   return {
     headers: {
       ...headers,
@@ -36,5 +37,6 @@ export const apolloClient = new ApolloClient({
     mutate: {
       errorPolicy: 'all'
     }
-  }
+  },
+  connectToDevTools: true
 }); 

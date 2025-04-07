@@ -13,17 +13,31 @@ async function startServer() {
   const app = express();
   
   // Apply middleware
+  const allowedOrigins = [
+    'http://localhost:3000',
+    'http://localhost:3001',
+    'http://localhost:3002',
+    'http://localhost:3003',
+    'https://community-aibot-1.onrender.com',
+    'https://community-aibot.onrender.com'
+  ];
+
   app.use(cors({
-    origin: [
-      'http://localhost:3000',
-      'http://localhost:3001',
-      'http://localhost:3002',
-      'http://localhost:3003',
-      'https://community-aibot-1.onrender.com',
-      'https://community-aibot.onrender.com'
-    ],
-    credentials: true
+    origin: function(origin, callback) {
+      console.log('Received request from origin:', origin);
+      if (!origin || allowedOrigins.includes(origin)) {
+        console.log('Origin allowed:', origin);
+        callback(null, true);
+      } else {
+        console.log('Origin not allowed:', origin);
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+    credentials: true,
+    methods: ['GET', 'POST', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
   }));
+
   app.use(express.json());
   app.use(auth); // Apply auth middleware
 
@@ -31,15 +45,14 @@ async function startServer() {
     typeDefs,
     resolvers,
     context: ({ req }) => {
-      // Return the authenticated user in the context
+      console.log('Apollo Server Context - User:', req.user ? 'Authenticated' : 'Not authenticated');
       return { 
         req, 
-        user: req.user // Explicitly add the user to the context
+        user: req.user
       };
     },
     formatError: (error) => {
       console.error('GraphQL Error:', error);
-      // Return a cleaner error message to the client
       return {
         message: error.message,
         locations: error.locations,
@@ -49,7 +62,11 @@ async function startServer() {
   });
 
   await apolloServer.start();
-  apolloServer.applyMiddleware({ app, cors: true });
+  apolloServer.applyMiddleware({ 
+    app, 
+    cors: false, // Disable Apollo's CORS since we're using express-cors
+    path: '/graphql'
+  });
 
   const PORT = process.env.PORT || 4000;
   const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/community-app';
@@ -64,6 +81,7 @@ async function startServer() {
   };
 
   try {
+    console.log('Attempting to connect to MongoDB...');
     await mongoose.connect(MONGODB_URI, mongooseOptions);
     console.log('MongoDB connected successfully');
 
@@ -73,7 +91,6 @@ async function startServer() {
     });
   } catch (error) {
     console.error('Error connecting to MongoDB:', error.message);
-    // Log additional error details for debugging
     if (error.code === 'ENOENT') {
       console.error('Certificate file not found. Please check the path:', process.env.MONGODB_URI);
     }
