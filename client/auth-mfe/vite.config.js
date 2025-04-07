@@ -21,7 +21,14 @@ export default defineConfig({
     minify: false,
     cssCodeSplit: false,
     rollupOptions: {
-      external: ['react', 'react-dom', '@apollo/client', 'react-router-dom', 'react-bootstrap']
+      external: ['react', 'react-dom', '@apollo/client', 'react-router-dom', 'react-bootstrap'],
+      output: {
+        format: 'esm',
+        dir: 'dist',
+        entryFileNames: 'assets/[name].js',
+        chunkFileNames: 'assets/[name].js',
+        assetFileNames: 'assets/[name].[ext]'
+      }
     }
   },
   server: {

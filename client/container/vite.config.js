@@ -26,7 +26,14 @@ export default defineConfig(({ mode }) => {
       minify: false,
       cssCodeSplit: false,
       rollupOptions: {
-        external: ['react', 'react-dom', '@apollo/client', 'react-router-dom', 'react-bootstrap']
+        external: ['react', 'react-dom', '@apollo/client', 'react-router-dom', 'react-bootstrap'],
+        output: {
+          format: 'esm',
+          dir: 'dist',
+          entryFileNames: 'assets/[name].js',
+          chunkFileNames: 'assets/[name].js',
+          assetFileNames: 'assets/[name].[ext]'
+        }
       }
     },
     server: {
@@ -38,8 +45,8 @@ export default defineConfig(({ mode }) => {
           'http://localhost:3002',
           'http://localhost:3003',
           'https://community-aibot-1.onrender.com',
-          'https://community-aibot-chatbox-mfe.onrender.com',
-          'https://community-aibot-community-mfe.onrender.com'
+          'https://community-aibot-community-mfe.onrender.com',
+          'https://community-aibot-chatbox-mfe.onrender.com'
         ],
         methods: ['GET', 'POST', 'OPTIONS'],
         allowedHeaders: ['Content-Type', 'Authorization'],
@@ -61,8 +68,8 @@ export default defineConfig(({ mode }) => {
           'http://localhost:3002',
           'http://localhost:3003',
           'https://community-aibot-1.onrender.com',
-          'https://community-aibot-2.onrender.com',
-          'https://community-aibot-3.onrender.com'
+          'https://community-aibot-community-mfe.onrender.com',
+          'https://community-aibot-chatbox-mfe.onrender.com'
         ],
         methods: ['GET', 'POST', 'OPTIONS'],
         allowedHeaders: ['Content-Type', 'Authorization'],
