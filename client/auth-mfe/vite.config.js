@@ -25,9 +25,18 @@ export default defineConfig({
     assetsDir: 'assets',
     rollupOptions: {
       external: ['react', 'react-dom', '@apollo/client', 'react-router-dom', 'react-bootstrap'],
+      input: {
+        main: 'index.html',
+        remoteEntry: 'src/App.jsx'
+      },
       output: {
         format: 'esm',
-        entryFileNames: '[name].js',
+        entryFileNames: (chunkInfo) => {
+          if (chunkInfo.name === 'remoteEntry') {
+            return 'remoteEntry.js';
+          }
+          return 'assets/[name].[hash].js';
+        },
         chunkFileNames: 'assets/[name].[hash].js',
         assetFileNames: 'assets/[name].[hash].[ext]'
       }
