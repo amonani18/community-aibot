@@ -4,7 +4,7 @@ import federation from '@originjs/vite-plugin-federation'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: 'https://community-aibot-1.onrender.com/',
+  base: '',
   plugins: [
     react(),
     federation({
@@ -21,14 +21,15 @@ export default defineConfig({
     target: 'esnext',
     minify: false,
     cssCodeSplit: false,
+    assetsDir: 'assets',
     rollupOptions: {
       external: ['react', 'react-dom', '@apollo/client', 'react-router-dom', 'react-bootstrap'],
       output: {
         format: 'esm',
-        dir: 'dist',
-        entryFileNames: 'assets/[name].js',
-        chunkFileNames: 'assets/[name].js',
-        assetFileNames: 'assets/[name].[ext]'
+        entryFileNames: '[name].js',
+        chunkFileNames: 'assets/[name].[hash].js',
+        assetFileNames: 'assets/[name].[hash].[ext]',
+        manualChunks: undefined
       }
     }
   },
