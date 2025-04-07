@@ -2,86 +2,46 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import federation from '@originjs/vite-plugin-federation';
 
-// Helper function to get environment variable with fallback
-const getEnvVar = (key, defaultValue) => {
-  return process.env[key] || defaultValue;
-};
-
-// Default URLs for development
-const defaultUrls = {
-  auth: 'http://localhost:3001',
-  community: 'http://localhost:3002',
-  ai_assistant: 'http://localhost:3003'
-};
-
-// Get URLs from environment or use defaults
-const getRemoteUrl = (name) => {
-  const envVar = `VITE_${name.toUpperCase()}_MFE_URL`;
-  const url = getEnvVar(envVar, defaultUrls[name]);
-  return `${url}/remoteEntry.js`;
-};
-
 export default defineConfig({
   plugins: [
     react(),
     federation({
       name: 'container',
-      filename: 'remoteEntry.js',
       remotes: {
-        auth: {
-          external: 'https://community-aibot-1.onrender.com/remoteEntry.js',
-          from: 'vite',
-          externalType: 'url'
-        },
-        community: getRemoteUrl('community'),
-        ai_assistant: getRemoteUrl('ai_assistant'),
+        auth: 'http://localhost:3001/assets/remoteEntry.js',
+        community: 'http://localhost:3002/assets/remoteEntry.js',
+        ai_assistant: 'http://localhost:3003/assets/remoteEntry.js',
       },
-      shared: ['react', 'react-dom', 'react-router-dom', '@apollo/client', 'graphql'],
-    }),
+      shared: ['react', 'react-dom', '@apollo/client', 'react-router-dom', 'react-bootstrap']
+    })
   ],
   build: {
+    modulePreload: false,
     target: 'esnext',
     minify: false,
     cssCodeSplit: false,
     rollupOptions: {
-      output: {
-        format: 'esm',
-        entryFileNames: '[name].js',
-        chunkFileNames: '[name].js',
-        assetFileNames: '[name].[ext]'
-      }
+      external: ['react', 'react-dom', '@apollo/client', 'react-router-dom', 'react-bootstrap']
     }
   },
   server: {
     port: 3000,
     strictPort: true,
     cors: {
-      origin: ['https://community-aibot-1.onrender.com', 'http://localhost:3001'],
-      methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-      allowedHeaders: ['Content-Type', 'Authorization'],
-      credentials: true
+      origin: '*'
     },
     headers: {
-      'Access-Control-Allow-Origin': 'https://community-aibot-1.onrender.com',
-      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-      'Access-Control-Allow-Credentials': 'true'
+      'Access-Control-Allow-Origin': '*'
     }
   },
   preview: {
     port: 3000,
     strictPort: true,
     cors: {
-      origin: ['https://community-aibot-1.onrender.com', 'http://localhost:3001'],
-      methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-      allowedHeaders: ['Content-Type', 'Authorization'],
-      credentials: true
+      origin: '*'
     },
     headers: {
-      'Access-Control-Allow-Origin': 'https://community-aibot-1.onrender.com',
-      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-      'Access-Control-Allow-Credentials': 'true'
+      'Access-Control-Allow-Origin': '*'
     }
   }
 }); 

@@ -2,8 +2,6 @@ const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const fs = require('fs');
-const path = require('path');
 require('dotenv').config();
 
 // Import type definitions and resolvers
@@ -40,9 +38,6 @@ async function startServer() {
         locations: error.locations,
         path: error.path
       };
-    },
-    persistedQueries: {
-      cache: 'bounded'
     }
   });
 
@@ -53,24 +48,11 @@ async function startServer() {
   const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/community-app';
 
   try {
-    // Create a temporary certificate file from base64
-    const certDir = path.join(__dirname, '..', 'certs');
-    if (!fs.existsSync(certDir)) {
-      fs.mkdirSync(certDir, { recursive: true });
-    }
-    
-    const certPath = path.join(certDir, 'temp-cert.pem');
-    const certContent = Buffer.from(process.env.MONGO_PEM_BASE64, 'base64').toString('utf-8');
-    fs.writeFileSync(certPath, certContent);
-
-    // Connect to MongoDB with the temporary certificate
     await mongoose.connect(MONGODB_URI, {
-      tlsCertificateKeyFile: certPath
+      useNewUrlParser: true,
+      useUnifiedTopology: true
     });
     console.log('MongoDB connected successfully');
-
-    // Clean up the temporary certificate file
-    fs.unlinkSync(certPath);
 
     app.listen(PORT, () => {
       console.log(`Server running at http://localhost:${PORT}`);

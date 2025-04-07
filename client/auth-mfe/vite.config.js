@@ -12,52 +12,36 @@ export default defineConfig({
       exposes: {
         './AuthApp': './src/App.jsx'
       },
-      shared: ['react', 'react-dom', 'react-router-dom', '@apollo/client', 'graphql']
+      shared: ['react', 'react-dom', '@apollo/client', 'react-router-dom', 'react-bootstrap']
     })
   ],
   build: {
+    modulePreload: false,
     target: 'esnext',
     minify: false,
     cssCodeSplit: false,
     rollupOptions: {
-      output: {
-        format: 'esm',
-        entryFileNames: '[name].js',
-        chunkFileNames: '[name].js',
-        assetFileNames: '[name].[ext]'
-      }
+      external: ['react', 'react-dom', '@apollo/client', 'react-router-dom', 'react-bootstrap']
     }
   },
   server: {
     port: 3001,
     strictPort: true,
     cors: {
-      origin: ['https://community-aibot-container.onrender.com', 'http://localhost:3000'],
-      methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-      allowedHeaders: ['Content-Type', 'Authorization'],
-      credentials: true
+      origin: '*'
     },
     headers: {
-      'Access-Control-Allow-Origin': 'https://community-aibot-container.onrender.com',
-      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-      'Access-Control-Allow-Credentials': 'true'
+      'Access-Control-Allow-Origin': '*'
     }
   },
   preview: {
     port: 3001,
     strictPort: true,
     cors: {
-      origin: ['https://community-aibot-container.onrender.com', 'http://localhost:3000'],
-      methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-      allowedHeaders: ['Content-Type', 'Authorization'],
-      credentials: true
+      origin: '*'
     },
     headers: {
-      'Access-Control-Allow-Origin': 'https://community-aibot-container.onrender.com',
-      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-      'Access-Control-Allow-Credentials': 'true'
+      'Access-Control-Allow-Origin': '*'
     }
   }
 })

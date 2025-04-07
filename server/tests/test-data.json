@@ -1,0 +1,147 @@
+{
+  "users": [
+    {
+      "username": "aniket",
+      "email": "aniket@example.com",
+      "password": "Password123",
+      "role": "resident"
+    },
+    {
+      "username": "hema",
+      "email": "hema@example.com",
+      "password": "Password123",
+      "role": "business_owner"
+    },
+    {
+      "username": "aaru",
+      "email": "aaru@example.com",
+      "password": "Password123",
+      "role": "community_organizer"
+    }
+  ],
+  "newsPosts": [
+    {
+      "title": "Community Garden Opening Next Month",
+      "content": "We are excited to announce that our community garden will be opening next month on April 15th. The garden will feature 20 plots for residents to grow their own vegetables and flowers.\n\nRegistration for garden plots will begin next week. Each plot costs $25 for the season, which covers water usage and access to community gardening tools.",
+      "category": "news"
+    },
+    {
+      "title": "Upcoming Road Closures Due to Construction",
+      "content": "Please be advised that Maple Street will be closed for repaving from April 5th to April 20th. Detours will be clearly marked, and access to residences will be maintained throughout the construction period.\n\nThe construction hours will be from 7:00 AM to 6:00 PM, Monday through Friday.",
+      "category": "news"
+    }
+  ],
+  "discussionPosts": [
+    {
+      "title": "What vegetables are you planning to grow in the community garden?",
+      "content": "I just signed up for a plot in the new community garden and I'm excited to start planting! I'm thinking of growing tomatoes, cucumbers, and some herbs.\n\nWhat is everyone else planning to grow? Any tips for a first-time gardener?",
+      "category": "discussion",
+      "linkedDiscussionId": "NEWS_POST_ID_1"
+    },
+    {
+      "title": "Alternative routes during road closure",
+      "content": "With Maple Street closing for construction, I'm trying to figure out the best alternative route to get to work. I normally take Maple to Oak Street.\n\nHas anyone mapped out efficient detours yet? I'm particularly concerned about morning rush hour traffic.",
+      "category": "discussion",
+      "linkedDiscussionId": "NEWS_POST_ID_2"
+    }
+  ],
+  "helpRequests": [
+    {
+      "description": "Need help moving furniture this weekend",
+      "location": "123 Main Street"
+    },
+    {
+      "description": "Looking for someone to walk my dog for the next week while I recover from surgery",
+      "location": "456 Oak Avenue"
+    },
+    {
+      "description": "Computer troubleshooting needed - my laptop won't boot up",
+      "location": "789 Pine Road"
+    }
+  ],
+  "aiQueries": [
+    {
+      "input": "What are the upcoming community events?"
+    },
+    {
+      "input": "Tell me about the community garden"
+    },
+    {
+      "input": "What construction work is happening in the area?"
+    }
+  ],
+  "exampleResponses": {
+    "register": {
+      "data": {
+        "register": {
+          "token": "JWT_TOKEN_HERE",
+          "user": {
+            "id": "USER_ID_HERE",
+            "username": "aniket",
+            "email": "aniket@example.com",
+            "role": "resident"
+          }
+        }
+      }
+    },
+    "login": {
+      "data": {
+        "login": {
+          "token": "JWT_TOKEN_HERE",
+          "user": {
+            "id": "USER_ID_HERE",
+            "username": "aniket",
+            "email": "aniket@example.com",
+            "role": "resident"
+          }
+        }
+      }
+    },
+    "createNewsPost": {
+      "data": {
+        "createCommunityPost": {
+          "id": "POST_ID_HERE",
+          "title": "Community Garden Opening Next Month",
+          "content": "We are excited to announce...",
+          "category": "news",
+          "author": {
+            "id": "USER_ID_HERE",
+            "username": "aniket"
+          }
+        }
+      }
+    },
+    "createHelpRequest": {
+      "data": {
+        "createHelpRequest": {
+          "id": "REQUEST_ID_HERE",
+          "description": "Need help moving furniture",
+          "location": "123 Main Street",
+          "author": {
+            "id": "USER_ID_HERE",
+            "username": "aniket"
+          }
+        }
+      }
+    },
+    "aiQuery": {
+      "data": {
+        "communityAIQuery": {
+          "text": "Based on the community posts, there are two upcoming events: 1) The community garden opening on April 15th...",
+          "suggestedQuestions": [
+            "How much does a garden plot cost?",
+            "When can I register for a plot?",
+            "What tools will be provided?"
+          ],
+          "retrievedPosts": [
+            {
+              "id": "POST_ID_HERE",
+              "title": "Community Garden Opening Next Month",
+              "content": "We are excited to announce..."
+            }
+          ]
+        }
+      }
+    }
+  }
+} 

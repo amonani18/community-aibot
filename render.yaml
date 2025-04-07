@@ -1,0 +1,79 @@
+services:
+  # Server
+  - type: web
+    name: community-portal-server
+    env: node
+    buildCommand: cd server && npm install
+    startCommand: cd server && npm run start
+    envVars:
+      - key: PORT
+        value: 4000
+      - key: MONGODB_URI
+        fromDatabase:
+          name: community-portal-db
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: GEMINI_API_KEY
+        sync: false
+    healthCheckPath: /graphql
+
+  # Auth MFE
+  - type: web
+    name: community-portal-auth
+    env: node
+    buildCommand: cd client/auth-mfe && npm install && npm run build
+    startCommand: cd client/auth-mfe && npm run preview
+    envVars:
+      - key: VITE_API_URL
+        value: https://community-portal-server.onrender.com/graphql
+      - key: VITE_PORT
+        value: 3000
+
+  # Community MFE
+  - type: web
+    name: community-portal-community
+    env: node
+    buildCommand: cd client/community-mfe && npm install && npm run build
+    startCommand: cd client/community-mfe && npm run preview
+    envVars:
+      - key: VITE_API_URL
+        value: https://community-portal-server.onrender.com/graphql
+      - key: VITE_PORT
+        value: 3001
+
+  # AI Assistant MFE
+  - type: web
+    name: community-portal-ai
+    env: node
+    buildCommand: cd client/ai-assistant-mfe && npm install && npm run build
+    startCommand: cd client/ai-assistant-mfe && npm run preview
+    envVars:
+      - key: VITE_API_URL
+        value: https://community-portal-server.onrender.com/graphql
+      - key: VITE_PORT
+        value: 3002
+
+  # Container MFE
+  - type: web
+    name: community-portal-container
+    env: node
+    buildCommand: cd client/container && npm install && npm run build
+    startCommand: cd client/container && npm run preview
+    envVars:
+      - key: VITE_API_URL
+        value: https://community-portal-server.onrender.com/graphql
+      - key: VITE_AUTH_URL
+        value: https://community-portal-auth.onrender.com
+      - key: VITE_COMMUNITY_URL
+        value: https://community-portal-community.onrender.com
+      - key: VITE_AI_URL
+        value: https://community-portal-ai.onrender.com
+      - key: VITE_PORT
+        value: 3003
+
+databases:
+  - name: community-portal-db
+    databaseName: community_portal
+    user: community_portal_user
+    plan: free 
