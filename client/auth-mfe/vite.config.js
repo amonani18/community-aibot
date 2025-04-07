@@ -2,7 +2,8 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import federation from '@originjs/vite-plugin-federation'
 
-// https://vite.dev/config/
+const allowedOrigin = 'https://community-aibot-container.onrender.com';
+
 export default defineConfig({
   base: '/',
   plugins: [
@@ -14,26 +15,11 @@ export default defineConfig({
         './AuthApp': './src/App.jsx'
       },
       shared: {
-        react: {
-          singleton: true,
-          requiredVersion: '^18.0.0'
-        },
-        'react-dom': {
-          singleton: true,
-          requiredVersion: '^18.0.0'
-        },
-        '@apollo/client': {
-          singleton: true,
-          requiredVersion: '^3.0.0'
-        },
-        'react-router-dom': {
-          singleton: true,
-          requiredVersion: '^6.0.0'
-        },
-        'react-bootstrap': {
-          singleton: true,
-          requiredVersion: '^2.0.0'
-        }
+        react: { singleton: true, requiredVersion: '^18.0.0' },
+        'react-dom': { singleton: true, requiredVersion: '^18.0.0' },
+        '@apollo/client': { singleton: true, requiredVersion: '^3.0.0' },
+        'react-router-dom': { singleton: true, requiredVersion: '^6.0.0' },
+        'react-bootstrap': { singleton: true, requiredVersion: '^2.0.0' }
       }
     })
   ],
@@ -57,13 +43,11 @@ export default defineConfig({
     port: 3001,
     strictPort: true,
     cors: {
-      origin: ['https://community-aibot-container.onrender.com', 'http://localhost:3000'],
-      methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-      allowedHeaders: ['Content-Type', 'Authorization'],
+      origin: allowedOrigin,
       credentials: true
     },
     headers: {
-      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Origin': allowedOrigin,
       'Access-Control-Allow-Methods': 'GET, POST, PUT, PATCH, DELETE, OPTIONS',
       'Access-Control-Allow-Headers': 'Content-Type, Authorization',
       'Access-Control-Allow-Credentials': 'true'
@@ -73,13 +57,11 @@ export default defineConfig({
     port: 3001,
     strictPort: true,
     cors: {
-      origin: ['https://community-aibot-container.onrender.com', 'http://localhost:3000'],
-      methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-      allowedHeaders: ['Content-Type', 'Authorization'],
+      origin: allowedOrigin,
       credentials: true
     },
     headers: {
-      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Origin': allowedOrigin,
       'Access-Control-Allow-Methods': 'GET, POST, PUT, PATCH, DELETE, OPTIONS',
       'Access-Control-Allow-Headers': 'Content-Type, Authorization',
       'Access-Control-Allow-Credentials': 'true'
