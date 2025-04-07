@@ -1,6 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter, MemoryRouter } from 'react-router-dom'
 import './index.css'
 import App from './App.jsx'
 
@@ -12,11 +12,18 @@ if (!rootElement) {
 } else {
   try {
     const root = createRoot(rootElement);
+    
+    // Check if we're running as a microfrontend
+    const isMicrofrontend = window.location.pathname.includes('/auth');
+    
+    const Router = isMicrofrontend ? MemoryRouter : BrowserRouter;
+    const basename = isMicrofrontend ? '/auth' : '/';
+    
     root.render(
       <StrictMode>
-        <BrowserRouter>
+        <Router basename={basename}>
           <App />
-        </BrowserRouter>
+        </Router>
       </StrictMode>,
     );
     console.log('Application rendered successfully');

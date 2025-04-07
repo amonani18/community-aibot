@@ -8,6 +8,8 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
+  const isMicrofrontend = window.location.pathname.includes('/auth');
+
   const verifyToken = async (token) => {
     console.log('Verifying token...');
     
@@ -73,28 +75,31 @@ export const AuthProvider = ({ children }) => {
     checkAuth();
   }, []);
 
+  const handleNavigation = (path) => {
+    if (isMicrofrontend) {
+      // In microfrontend mode, use window.location
+      window.location.href = path;
+    } else {
+      // In standalone mode, use React Router navigation
+      try {
+        navigate(path);
+      } catch (error) {
+        console.warn('Navigation error:', error);
+        window.location.href = path;
+      }
+    }
+  };
+
   const login = (token, userData) => {
     localStorage.setItem('token', token);
     setUser(userData);
-    try {
-      navigate('/');
-    } catch (error) {
-      console.warn('Navigation error:', error);
-      // Fallback to window.location if navigation fails
-      window.location.href = '/';
-    }
+    handleNavigation('/');
   };
 
   const logout = () => {
     localStorage.removeItem('token');
     setUser(null);
-    try {
-      navigate('/login');
-    } catch (error) {
-      console.warn('Navigation error:', error);
-      // Fallback to window.location if navigation fails
-      window.location.href = '/login';
-    }
+    handleNavigation('/login');
   };
 
   const value = {
