@@ -8,9 +8,9 @@ export default defineConfig({
     federation({
       name: 'container',
       remotes: {
-        auth: 'http://localhost:3001/assets/remoteEntry.js',
-        community: 'http://localhost:3002/assets/remoteEntry.js',
-        ai_assistant: 'http://localhost:3003/assets/remoteEntry.js',
+        auth: import.meta.env.VITE_AUTH_URL || 'http://localhost:3001/assets/remoteEntry.js',
+        community: import.meta.env.VITE_COMMUNITY_URL || 'http://localhost:3002/assets/remoteEntry.js',
+        ai_assistant: import.meta.env.VITE_AI_ASSISTANT_URL || 'http://localhost:3003/assets/remoteEntry.js',
       },
       shared: ['react', 'react-dom', '@apollo/client', 'react-router-dom', 'react-bootstrap']
     })
